@@ -23,7 +23,7 @@ cd "$(dirname "$0")"
 
 # プロジェクトアナライザ本体 (project_analyzer.py) があるディレクトリを指定します。
 # デフォルト: "." (この起動スクリプトと同じディレクトリ)
-# 例: "/home/user/tools/nl-analyzer" など
+# 例: "/home/user/tools/nl-analyzer" や "../shared-tools" など
 ANALYZER_DIR="."
 
 # =============================================================================
@@ -43,14 +43,38 @@ if [ ! -f "$ANALYZER_SCRIPT" ]; then
     exit 1
 fi
 
-# Pythonコマンドの検出 (python3 または python)
-if command -v python3 &>/dev/null; then
-    PYTHON_CMD=python3
-elif command -v python &>/dev/null; then
-    PYTHON_CMD=python
+# Pythonコマンドの検出
+# 優先順位:
+# 1. アナライザディレクトリ内の .venv (仮想環境)
+# 2. システムの python3
+# 3. システムの python
+
+PYTHON_CMD=""
+VENV_DIR="${ANALYZER_DIR}/.venv"
+
+# 仮想環境のチェック
+if [ -f "${VENV_DIR}/bin/python" ]; then
+    PYTHON_CMD="${VENV_DIR}/bin/python"
+elif [ -f "${VENV_DIR}/Scripts/python" ]; then
+    # Windows (Git Bash等)
+    PYTHON_CMD="${VENV_DIR}/Scripts/python"
+elif [ -f "${VENV_DIR}/Scripts/python.exe" ]; then
+    # Windows (Exe直接)
+    PYTHON_CMD="${VENV_DIR}/Scripts/python.exe"
+fi
+
+if [ -n "$PYTHON_CMD" ]; then
+    echo "🐍 仮想環境を使用します: ${VENV_DIR}"
 else
-    echo "❌ エラー: Pythonが見つかりません。Python 3.6以上をインストールしてください。"
-    exit 1
+    # システムPythonへのフォールバック
+    if command -v python3 &>/dev/null; then
+        PYTHON_CMD=python3
+    elif command -v python &>/dev/null; then
+        PYTHON_CMD=python
+    else
+        echo "❌ エラー: Pythonが見つかりません。Python 3.6以上をインストールしてください。"
+        exit 1
+    fi
 fi
 
 # lizardのチェック（情報表示のみ）

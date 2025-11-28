@@ -43,14 +43,38 @@ if [ ! -f "$ANALYZER_SCRIPT" ]; then
     exit 1
 fi
 
-# Detect Python command (python3 or python)
-if command -v python3 &>/dev/null; then
-    PYTHON_CMD=python3
-elif command -v python &>/dev/null; then
-    PYTHON_CMD=python
+# Detect Python command
+# Priority:
+# 1. .venv in analyzer directory
+# 2. System python3
+# 3. System python
+
+PYTHON_CMD=""
+VENV_DIR="${ANALYZER_DIR}/.venv"
+
+# Check for virtual environment
+if [ -f "${VENV_DIR}/bin/python" ]; then
+    PYTHON_CMD="${VENV_DIR}/bin/python"
+elif [ -f "${VENV_DIR}/Scripts/python" ]; then
+    # Windows (Git Bash etc.)
+    PYTHON_CMD="${VENV_DIR}/Scripts/python"
+elif [ -f "${VENV_DIR}/Scripts/python.exe" ]; then
+    # Windows (Direct Exe)
+    PYTHON_CMD="${VENV_DIR}/Scripts/python.exe"
+fi
+
+if [ -n "$PYTHON_CMD" ]; then
+    echo "[INFO] Using virtual environment: ${VENV_DIR}"
 else
-    echo "[ERROR] Python not found. Please install Python 3.6 or higher."
-    exit 1
+    # Fallback to system python
+    if command -v python3 &>/dev/null; then
+        PYTHON_CMD=python3
+    elif command -v python &>/dev/null; then
+        PYTHON_CMD=python
+    else
+        echo "[ERROR] Python not found. Please install Python 3.6 or higher."
+        exit 1
+    fi
 fi
 
 # Check for lizard library (Informational only)
