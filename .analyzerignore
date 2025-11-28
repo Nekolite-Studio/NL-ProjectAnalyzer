@@ -1,0 +1,104 @@
+# ==========================================
+# NL-ProjectAnalyzer Global Ignore Rules
+# ==========================================
+
+# --- Version Control ---
+.git/
+.svn/
+.hg/
+
+# --- Operating System & Editor Files ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+.clion/
+.settings/
+
+# --- Dependencies & Environments ---
+# Python
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyd
+
+# JavaScript / Node.js
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-error.log
+# Next.js build output
+.next/
+# Nuxt.js build output
+.nuxt/
+# General JS/TS output
+out/
+
+# Ruby
+vendor/bundle/
+.bundle/
+
+# Java / JVM
+.gradle/
+build/
+target/
+*.jar
+*.war
+*.ear
+
+# Go
+# Go module cache or intermediate packages
+pkg/
+
+# General
+packages/
+vendor/
+
+# --- Build & Output Artifacts ---
+build/
+dist/
+target/
+bin/
+obj/
+tmp/
+out/
+Release/
+Debug/
+# Object/Archive files (Go, C/C++, etc.)
+*.[oa]
+*.exe
+*.dll
+*.so
+*.dylib
+
+# --- Logs & Caches ---
+*.log
+*.tmp
+*.bak
+.cache/
+coverage/
+# Terraform state files/cache (state files should be ignored too)
+.terraform/
+
+# --- Locks & State ---
+*.lock
+.project
+.classpath
+
+# --- Sensitive / Local Config (Add more specific files as needed) ---
+*.env
+.env.local
+
+# --- Optional Assets (Uncomment to ignore) ---
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.ico
+# *.svg
+# *.woff
+# *.ttf
