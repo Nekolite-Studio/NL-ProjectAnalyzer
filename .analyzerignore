@@ -93,6 +93,9 @@ coverage/
 *.env
 .env.local
 
+# --- Analyzer output ---
+outputs/
+
 # --- Optional Assets (Uncomment to ignore) ---
 # *.png
 # *.jpg
