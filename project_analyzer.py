@@ -29,7 +29,7 @@ VERSION = "1.3.1"
 
 # バイナリとして扱う（テキスト解析をスキップする）拡張子
 BINARY_EXTENSIONS = {
-    '.png', '.jpg', '.jpeg', '.gif', '.ico', '.pdf', '.zip', '.tar', '.gz', 
+    '.png', '.jpg', '.jpeg', '.gif', '.ico', '.pdf', '.zip', '.tar', '.gz', '.7z',
     '.exe', '.dll', '.so', '.bin', '.dat', '.mp3', '.mp4', '.avi', '.mov',
     '.woff', '.woff2', '.ttf', '.eot'
 }

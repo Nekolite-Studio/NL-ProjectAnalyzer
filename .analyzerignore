@@ -1,23 +1,68 @@
-# ==========================================
-# NL-ProjectAnalyzer Global Ignore Rules
-# ==========================================
+# =============================================================================
+# NL-ProjectAnalyzer Ignore Rules
+# =============================================================================
 
-# --- Version Control ---
+# -----------------------------------------------------------------------------
+# 1. Version Control & System (Base Cleanups)
+# -----------------------------------------------------------------------------
+# Version Control
 .git/
 .svn/
 .hg/
 
-# --- Operating System & Editor Files ---
+# OS & Filesystem
 .DS_Store
 Thumbs.db
-*.swp
-*.swo
+Desktop.ini
+desktop.ini
+
+# -----------------------------------------------------------------------------
+# 2. Editors & IDEs (Development Tools)
+# -----------------------------------------------------------------------------
+# General IDE settings
 .vscode/
 .idea/
 .clion/
 .settings/
+.project
+.classpath
 
-# --- Dependencies & Environments ---
+# AI Code Editors (Cursor, Windsurf, Cline, etc.)
+.cursor
+.windsurf/
+.codeium/
+.continue/
+.kilocode
+.cline
+
+# Ignore files logic
+.*ignore
+
+# -----------------------------------------------------------------------------
+# 3. Security & Secrets (CRITICAL)
+# -----------------------------------------------------------------------------
+# Environment Variables
+*.env
+.env.local
+
+# Keys & Certificates
+*.pem
+*.pub
+*.key
+*.p12
+*.keystore
+id_rsa
+id_dsa
+
+# Cloud Configs
+.aws/
+.azure/
+.gcloud/
+.terraform/
+
+# -----------------------------------------------------------------------------
+# 4. Dependencies & Environments (Language Specific)
+# -----------------------------------------------------------------------------
 # Python
 venv/
 .venv/
@@ -31,34 +76,28 @@ node_modules/
 package-lock.json
 npm-debug.log*
 yarn-error.log
-# Next.js build output
-.next/
-# Nuxt.js build output
-.nuxt/
-# General JS/TS output
-out/
 
 # Ruby
 vendor/bundle/
 .bundle/
 
-# Java / JVM
-.gradle/
-build/
-target/
-*.jar
-*.war
-*.ear
-
 # Go
-# Go module cache or intermediate packages
 pkg/
-
-# General
-packages/
 vendor/
 
-# --- Build & Output Artifacts ---
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# iOS / CocoaPods
+Pods/
+DerivedData/
+
+# -----------------------------------------------------------------------------
+# 5. Build Artifacts & Compiled Files
+# -----------------------------------------------------------------------------
+# General Build Directories
 build/
 dist/
 target/
@@ -68,40 +107,104 @@ tmp/
 out/
 Release/
 Debug/
-# Object/Archive files (Go, C/C++, etc.)
+
+# Web Framework Builds (Next.js, Nuxt, etc.)
+.next/
+.nuxt/
+
+# Java / JVM
+.gradle/
+*.jar
+*.war
+*.ear
+
+# Object/Archive files (C/C++, Go, etc.)
 *.[oa]
 *.exe
 *.dll
 *.so
 *.dylib
 
-# --- Logs & Caches ---
+# Minified & Bundled Files (Noise for analysis)
+*.min.js
+*.min.css
+*.min.map
+*.bundle.js
+*.map
+
+# -----------------------------------------------------------------------------
+# 6. Assets, Archives & Models (Non-Text / Heavy Files)
+# -----------------------------------------------------------------------------
+# Images & Media
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.svg
+*.webp
+*.mp4
+*.mov
+*.mp3
+*.wav
+
+# Fonts
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.eot
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# AI Models & Weights (Heavy files)
+*.pth
+*.pt
+*.onnx
+*.gguf
+*.safetensors
+*.ckpt
+
+# -----------------------------------------------------------------------------
+# 7. Logs, Caches & Documentation
+# -----------------------------------------------------------------------------
+# Logs & Temp files
 *.log
 *.tmp
 *.bak
 .cache/
-coverage/
-# Terraform state files/cache (state files should be ignored too)
-.terraform/
-
-# --- Locks & State ---
 *.lock
-.project
-.classpath
 
-# --- Sensitive / Local Config (Add more specific files as needed) ---
-*.env
-.env.local
+# Testing & Coverage
+coverage/
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+junit.xml
+test-results/
 
-# --- Analyzer output ---
-outputs/
+# Documentation Builds
+docs/_build/
+site/
+_site/
+public/
+.docusaurus/
 
-# --- Optional Assets (Uncomment to ignore) ---
-# *.png
-# *.jpg
-# *.jpeg
-# *.gif
-# *.ico
-# *.svg
-# *.woff
-# *.ttf
+# -----------------------------------------------------------------------------
+# 8. Analyzer Specific
+# -----------------------------------------------------------------------------
+NL-ServerManager_*/
+project_analyzer.py
